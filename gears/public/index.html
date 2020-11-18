@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="favicon-32.png" sizes="32x32">
+  <link rel="icon" href="favicon-128.png" sizes="128x128">
+  <link rel="icon" href="favicon-167.png" sizes="167x167">
+  <link rel="icon" href="favicon-192.png" sizes="192x192">
+
+  <link rel="stylesheet" href="css/main.css?v=2c993920">
+  <link rel="stylesheet" href="css/widgets.css?v=c3d4f957">
+
+  <script src="jquery/jquery-3.5.1.slim.min.js"></script>
+
+  <script src="ace-1.4.10/src-min/ace.js"></script>
+  <script src="ace-1.4.10/src-min/ext-language_tools.js"></script>
+
+  <script src="skulpt/0.11.0/skulpt.min.js"></script>
+  <script src="skulpt/0.11.0/skulpt-stdlib.js"></script>
+
+  <script src="ammo/ammo-20200613.js"></script>
+  <!-- <script src="ammo/ammo-20200724.wasm.js"></script> -->
+
+  <script src="babylon/4.1.0/babylon-physicsFix.js"></script>
+  <!-- <script src="babylon/4.1.0/babylon.js"></script> -->
+  <!-- <script src="babylon/4.1.0/babylonjs.loaders.min.js"></script>
+  <script src="babylon/4.1.0/babylon.gui.min.js"></script> -->
+  <script src="pep/0.4.3/pep.min.js"></script>
+
+  <script src="jszip/3.5.0/jszip.min.js"></script>
+
+  <script src="js/msg.js?v=01fa738e"></script>
+  <script src="js/common/widgets.js?v=8d532d57"></script>
+
+  <title>GearsBot</title>
+</head>
+
+<body>
+  <header>
+    <img class="gearsIcon" src="favicon-32.png">
+    <div>GearsBot</div>
+    <input type="text" id="projectName" placeholder="Project Name">
+    <div class="language"><span class="icon-globe"></span> &#x25BE;</div>
+  </header>
+
+  <main>
+    <nav>
+      <ul class="panelTabs">
+        <li id="navBlocks" class="active">Blocks</li>
+        <li id="navPython">Python</li>
+        <li id="navSim">Simulator</li>
+      </ul>
+      <div class="menuBar">
+        <div class="menuItem fileMenu">File</div>
+        <div class="menuItem pythonMenu">Python</div>
+        <div class="menuItem robotMenu">Robot</div>
+        <div class="menuItem arenaButton">Arena</div>
+        <div class="menuItem helpMenu">Help</div>
+      </div>
+      <div class="panelControlsArea">
+        <div class="panelControls active" aria-labelledby="navBlocks">
+          <div class="saveBlockly hide">Save Now</div>
+        </div>
+        <div class="panelControls " aria-labelledby="navPython">
+          <div class="savePython hide">Save Now</div>
+        </div>
+      </div>
+    </nav>
+    <div class="panels">
+
+      <div class="blocklyEditor panel active" aria-labelledby="navBlocks">
+        <div id="blocklyDiv" style="height: 100%; width: 100%;"></div>
+        <div id="blocklyHiddenDiv" style="height: 100%; width: 100%; position: absolute; top: -10000px;"></div>
+        <div id="blocklyPages"><span class="currentPage">Main</span></div>
+      </div>
+
+      <div class="panel" aria-labelledby="navPython">
+        <div id="pythonCode"></div>
+      </div>
+
+      <div class="panel" aria-labelledby="navSim">
+        <canvas id="renderCanvas" touch-action="none"></canvas>
+        <div class="runSim"><span class="icon-play"></span></div>
+        <div class="world">World</div>
+        <div class="reset">Reset</div>
+        <div class="sensors">Sensors</div>
+        <div class="camera"><span class="icon-camera"></span> Follow</div>
+
+        <div class="worldInfo hide"></div>
+        <div class="sensorReadings hide"></div>
+        <div class="ruler closed">
+          <div class="icon">
+            <span class="icon-ruler"></span>
+          </div>
+          <div class="measurements">
+            <table>
+              <tr>
+                <td class="x">X:</td>
+                <td class="y">Y:</td>
+                <td class="alt">Alt:</td>
+              </tr>
+              <tr>
+                <td class="dist" colspan="2">Distance:</td>
+                <td class="angle">Angle:</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="console">
+          <div class="chevron"></div>
+          <div title="Clear Console"  class="clear">&#x239a;</div>
+          <pre class="content"></pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="blockly/3.20200402.1/blockly.js"></script>
+  <script src="blockly/3.20200402.1/blocks.js"></script>
+  <script src="blockly/3.20200402.1/python.js"></script>
+  <!-- <script src="blockly/3.20200402.1/msg/en.js"></script> -->
+
+  <script src="js/ev3dev2_generator.js?v=7f6c87ea"></script>
+  <script src="js/pybricks_generator.js?v=4d05c17d"></script>
+  <script src="js/blockly.js?v=54fd6a6d"></script>
+  <script src="js/skulpt.js?v=24e085c9"></script>
+  <script src="js/world_Grid.js?v=0668fc43"></script>
+  <script src="js/world_LineFollowing.js?v=fc4801f0"></script>
+  <script src="js/world_Gyro.js?v=d1bfe505"></script>
+  <script src="js/world_Paintball.js?v=ef2fce1c"></script>
+  <script src="js/world_Sumo.js?v=2c98346c"></script>
+  <script src="js/world_FireRescue.js?v=a7b2dd9f"></script>
+  <script src="js/world_Maze.js?v=c4d2a6e4"></script>
+  <script src="js/world_Image.js?v=05499f09"></script>
+  <script src="js/world_Arena.js?v=a8084ba0"></script>
+  <script src="js/world_Test.js?v=71ba47ec"></script>
+  <script src="js/robotComponents.js?v=259e8a82"></script>
+  <script src="js/robotTemplates.js?v=76d6c554"></script>
+  <script src="js/Wheel.js?v=bcd088f9"></script>
+  <script src="js/Robot.js?v=c96904cb"></script>
+  <script>
+    var robots = [];
+
+    var robot = new Robot();
+    robot.options = {};
+    Object.assign(robot.options, robotTemplates[0]);
+    robot.player = 'single';
+    robots.push(robot);
+  </script>
+  <script src="js/babylon.js?v=7a657644"></script>
+  <script src="js/blocklyPanel.js?v=a34b3eb5"></script>
+  <script src="js/pythonPanel.js?v=ae836351"></script>
+  <script src="js/simPanel.js?v=fc10b316"></script>
+  <script src="js/main.js?v=4d83f4d9"></script>
+
+  <script>
+    // Init classes
+    blockly.init();
+  </script>
+</body>
+</html>
